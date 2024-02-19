@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/insta_attend/insta_attend.iml" filepath="$PROJECT_DIR$/insta_attend/insta_attend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insta_attend/android/insta_attend_android.iml" filepath="$PROJECT_DIR$/insta_attend/android/insta_attend_android.iml" />
+    </modules>
+  </component>
+</project>
