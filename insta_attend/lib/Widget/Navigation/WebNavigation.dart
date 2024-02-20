@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_attend/Screens/changeAttendance.dart';
 
 import '../../Screens/Homepage.dart';
 import '../../Screens/AttendanceDetails.dart';
@@ -23,7 +24,8 @@ class _WebNavigationState extends State<WebNavigation> {
     EmployeeDetails(),
     AttendanceDetails(),
     EmployeeSetting(),
-    EnrollmentRequest()
+    EnrollmentRequest(),
+    ChangeAttendance()
   ];
   @override
   Widget build(BuildContext context) {
@@ -95,6 +97,10 @@ class _WebNavigationState extends State<WebNavigation> {
                 NavigationRailDestination(
                   icon: Icon(Icons.done_all),
                   label: Text("Enrollment Status"),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.edit_calendar_outlined),
+                  label: Text("Change Attendance Record"),
                 ),
               ],
               selectedIndex: _selectedIndex,

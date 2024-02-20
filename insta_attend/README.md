@@ -2,6 +2,8 @@
 
 In this project we intend to deliver the admin panel / dashboard through which the admin can handle, access and edit the information related to employees, their attendance and  various conditions like geofencing, Enrollment.
 
+-------------------------------------------------------------------
+
 # Phase - I :
 ### Admin will be able to do - 
 
@@ -12,6 +14,7 @@ In this project we intend to deliver the admin panel / dashboard through which t
 * Edit geofencing of the employee.
 * See and approve enrollment requests from the employee.
 
+-------------------------------------------------------------------
 
 # TODO :
 
@@ -19,7 +22,7 @@ In this project we intend to deliver the admin panel / dashboard through which t
 * Make employee settings page a bit responsive.
 * Add edit employee details logic.
 
-
+-------------------------------------------------------------------
 
 ## Developer's Team
 
@@ -30,11 +33,7 @@ In this project we intend to deliver the admin panel / dashboard through which t
 * **Khushi Dhotre** - Blueprint drawings.
 
 
-
-
-
-
-
+-------------------------------------------------------------------
 
 
 ###### In order to run this project follow these steps
@@ -50,3 +49,13 @@ Choose device to run the application (Emulator/Physical Android Mobile/Chrome/Ed
 
 **Step-1**
 Click on run button or run command "flutter run -device".
+
+-------------------------------------------------------------------
+
+###### In order to deploy this website after changes
+
+**Step-1**
+Build web project using command flutter build web.
+
+**Step-2**
+Deploy the website using command firebase deploy.

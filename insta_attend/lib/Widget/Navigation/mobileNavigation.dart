@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_attend/Screens/changeAttendance.dart';
 
 import '../../Screens/Homepage.dart';
 import '../../Screens/AttendanceDetails.dart';
@@ -23,7 +24,8 @@ class _mobileNavigationState extends State<mobileNavigation> {
     EmployeeDetails(),
     AttendanceDetails(),
     EmployeeSetting(),
-    EnrollmentRequest()
+    EnrollmentRequest(),
+    ChangeAttendance()
   ];
   @override
   Widget build(BuildContext context) {
@@ -79,6 +81,9 @@ class _mobileNavigationState extends State<mobileNavigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.done_all),
             label: "Enrollment Request",
+          ),BottomNavigationBarItem(
+              icon: Icon(Icons.edit_calendar_outlined),
+              label: "Change Attendance Record",
           ),
         ],
       ),
