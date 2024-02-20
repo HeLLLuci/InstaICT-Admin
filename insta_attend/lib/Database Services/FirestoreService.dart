@@ -82,17 +82,6 @@ class FirebaseService {
     ));
   }
 
-  static Future<void> _updateEnrollment(String employeeId, bool isEnrolled) async {
-    try {
-      await _firestore.collection('employeeDetails').doc(employeeId).update({
-        'isEnrolled': isEnrolled,
-      });
-      print('Enrollment updated successfully for $employeeId.');
-    } catch (error) {
-      print('Error updating enrollment: $error');
-    }
-  }
-
   static Future<void> showPopUp(String employeeId, bool isEnrolled, BuildContext context) async {
     try {
       final doc = await _firestore.collection('employeeDetails').doc(employeeId).get();
