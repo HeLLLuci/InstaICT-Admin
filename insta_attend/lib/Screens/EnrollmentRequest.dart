@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_attend/Database%20Services/FirestoreService.dart';
 import 'package:insta_attend/configurations/CardTextStyle.dart';
 
 class EnrollmentRequest extends StatefulWidget {
@@ -29,34 +30,34 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
 
         final documents = snapshot.data!.docs;
 
-        return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 300,
-                  child: Card(
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.done_all,
-                        size: 50,
+        return SingleChildScrollView(
+          child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 300,
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.done_all,
+                          size: 50,
+                        ),
+                        title: Text(
+                          "Enrollment",
+                          style: CardTextStyle.titleMobileStyle,
+                        ),
+                        subtitle: Text("Requests"),
                       ),
-                      title: Text(
-                        "Enrollment",
-                        style: CardTextStyle.titleMobileStyle,
-                      ),
-                      subtitle: Text("Requests"),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  width: 500,
-                  child: SingleChildScrollView(
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    width: 500,
                     child: ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -66,59 +67,53 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                         final employeeId = documents[index].id;
                         final employeeName = employeeData['username'] as String?;
                         final isEnrolled = employeeData['isEnrolled'] as bool?;
-                            
+
                         if (employeeName == null || isEnrolled == null) {
                           return SizedBox.shrink();
                         }
-                            
+
                         return Container(
                           height: 100,
-                          child: Card(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  employeeName,
-                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        IconButton(
-                                          icon: Icon(
-                                            isEnrolled ? Icons.check_circle : Icons.check_circle_outline,
-                                            color: Colors.green,
+                          child: GestureDetector(
+                            onTap: (){
+                              FirebaseService.showPopUp(employeeId, isEnrolled, context);
+                            },
+                            child: Card(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    employeeName,
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(
+                                              isEnrolled ? Icons.check_circle : Icons.check_circle_outline,
+                                              color: Colors.green,
+                                            ),
+                                            onPressed: () => FirebaseService.updateEnrollment(employeeId, !isEnrolled),
                                           ),
-                                          onPressed: () => _updateEnrollment(employeeId, !isEnrolled),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
                       },
                     ),
                   ),
-                ),
-              ],
-            );
+                ],
+              ),
+        );
       },
     );
-  }
-
-  Future<void> _updateEnrollment(String employeeId, bool isEnrolled) async {
-    try {
-      await _firestore.collection('employeeDetails').doc(employeeId).update({
-        'isEnrolled': isEnrolled,
-      });
-      print('Enrollment updated successfully for $employeeId.');
-    } catch (error) {
-      print('Error updating enrollment: $error');
-    }
   }
 }

@@ -1,11 +1,11 @@
 {
-    "name": "insta_attend",
-    "short_name": "insta_attend",
+    "name": "Admin Dashboard",
+    "short_name": "Admin Dashboard",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Website generated for admin functionalities for AMS",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

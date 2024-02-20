@@ -30,7 +30,7 @@ class _mobileNavigationState extends State<mobileNavigation> {
     return Scaffold(
       // For mobile Screen
       appBar:  AppBar(
-        title: Text("InstaAttend Dashboard",
+        title: Text("Admin Dashboard",
           style: TextStyle(
             color: Colors.white,
           ),
@@ -49,9 +49,9 @@ class _mobileNavigationState extends State<mobileNavigation> {
         backgroundColor: Color(0xFF4facfe),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.yellow,
+        elevation: 3,
         currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.white,
+        unselectedItemColor: Colors.blue,
         selectedItemColor: Colors.deepPurple.shade900,
 
         onTap: (int index){
@@ -82,9 +82,11 @@ class _mobileNavigationState extends State<mobileNavigation> {
           ),
         ],
       ),
-      body: Row(
+      body: Column(
         children: [
-          Expanded(child: _screens[_selectedIndex]),
+          Expanded(
+              child: _screens[_selectedIndex]
+          ),
         ],
       ),
     );

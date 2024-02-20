@@ -31,7 +31,7 @@ class _WebNavigationState extends State<WebNavigation> {
       // For Laptop Screen
       drawer: Drawer(),
       appBar:  AppBar(
-        title: Text("InstaAttend Dashboard",
+        title: Text("Admin Dashboard",
           style: TextStyle(
             color: Colors.white,
           ),

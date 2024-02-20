@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Admin Dashboard",
       theme: ThemeData(
         primaryColor: Colors.blueAccent,
         primarySwatch: Colors.blue

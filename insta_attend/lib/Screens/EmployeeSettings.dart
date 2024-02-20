@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_attend/Database%20Services/FirestoreService.dart';
 import 'package:insta_attend/Widget/Animations/Loading.dart';
+import 'package:insta_attend/Widget/editEmployeeDetails.dart';
 
 class EmployeeSetting extends StatefulWidget {
   const EmployeeSetting({Key? key});
@@ -26,34 +28,34 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
 
         final documents = snapshot.data!.docs;
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: 300,
-              child: Card(
-                child: ListTile(
-                  leading: Icon(
-                    Icons.person_add_alt_1,
-                    size: 50,
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                width: 300,
+                child: Card(
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.person_add_alt_1,
+                      size: 50,
+                    ),
+                    title: Text(
+                      "Employee",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text("Settings"),
                   ),
-                  title: Text(
-                    "Employee",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text("Settings"),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            SingleChildScrollView(
-              child: ListView.builder(
+              SizedBox(
+                height: 30,
+              ),
+              ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: documents.length,
@@ -65,7 +67,7 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                   final employeePhone = employeeData?['phoneNumber'] as String?;
                   final isEnrolled = employeeData?['isEnrolled'] as bool?;
                   final geoFencing = employeeData?['geoFencing'] as bool?;
-
+              
                   if (employeeName == null
                       || isEnrolled == null
                       || geoFencing == null
@@ -73,7 +75,7 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                       || employeeEmail == null) {
                     return SizedBox.shrink();
                   }
-
+              
                   return Container(
                     width: 600,
                     margin: EdgeInsets.all(8.0),
@@ -95,20 +97,6 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                         SizedBox(
                           width: 10,
                         ),
-                        // Text(
-                        //   employeePhone,
-                        //   style: TextStyle(fontSize: 18),
-                        // ),
-                        // SizedBox(
-                        //   width: 30,
-                        // ),
-                        // Text(
-                        //   employeeEmail,
-                        //   style: TextStyle(fontSize: 18),
-                        // ),
-                        // SizedBox(
-                        //   width: 30,
-                        // ),
                         Column(
                           children: [
                             Row(
@@ -118,7 +106,7 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                                     isEnrolled ? Icons.check_box : Icons.check_box_outline_blank,
                                     color: Colors.green,
                                   ),
-                                  onPressed: () => _updateEnrollment(
+                                  onPressed: () => FirebaseService.updateEnrollment(
                                     employeeId,
                                     !isEnrolled,
                                   ),
@@ -140,7 +128,7 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                                     geoFencing ? Icons.check_box : Icons.check_box_outline_blank,
                                     color: Colors.blue,
                                   ),
-                                  onPressed: () => _updateGeoFencing(
+                                  onPressed: () => FirebaseService.updateGeoFencing(
                                     employeeId,
                                     !geoFencing,
                                   ),
@@ -150,42 +138,28 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                             Text("Geofencing")
                           ],
                         ),
-                        // SizedBox(
-                        //   width: 30,
-                        // ),
-                        // IconButton(onPressed: (){}, icon: Icon(Icons.edit))
+                        SizedBox(
+                          width: 30,
+                        ),
+                        IconButton(onPressed: (){
+                          editEmployeeDetail(employeeId, context);
+                        }, icon: Icon(Icons.edit)),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        IconButton(onPressed: (){
+                          FirebaseService.deleteEmployee(employeeId, context);
+                        }, icon: Icon(Icons.delete, color: Colors.red,)
+                        ),
                       ],
                     ),
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
-  }
-
-  Future<void> _updateEnrollment(String employeeId, bool isEnrolled) async {
-    try {
-      await _firestore.collection('employeeDetails').doc(employeeId).update({
-        'isEnrolled': isEnrolled,
-      });
-      print('Enrollment updated successfully for $employeeId.');
-    } catch (error) {
-      print('Error updating enrollment: $error');
-    }
-  }
-
-
-  Future<void> _updateGeoFencing(String employeeId, bool geoFencing) async {
-    try {
-      await _firestore.collection('employeeDetails').doc(employeeId).update({
-        'geoFencing': geoFencing,
-      });
-      print('Geofencing updated successfully for $employeeId.');
-    } catch (error) {
-      print('Error updating: $error');
-    }
   }
 }

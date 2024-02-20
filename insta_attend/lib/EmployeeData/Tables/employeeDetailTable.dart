@@ -34,8 +34,8 @@ class _employeeDetailTableState extends State<employeeDetailTable> {
           return Center(child: Text('No data available.'));
         }
 
-        List<String> columnOrder = ['username', 'email', 'phoneNumber', 'isEnrolled', 'geoFencing'];
-        List<String> columnList = ["Employee Name", "Email", "Phone Number", "Activation", "GeoFencing"];
+        List<String> columnOrder = ['username', 'email', 'phoneNumber','employeeType', 'isEnrolled', 'geoFencing'];
+        List<String> columnList = ["Employee Name", "Email", "Phone Number","Employee Type", "Activation", "GeoFencing"];
 
         if (searchController.text.isNotEmpty) {
           filteredDocuments = documents.where((document) {
