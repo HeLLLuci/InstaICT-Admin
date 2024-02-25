@@ -96,7 +96,7 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                                               isEnrolled ? Icons.check_circle : Icons.check_circle_outline,
                                               color: Colors.green,
                                             ),
-                                            onPressed: () => FirebaseService.updateEnrollment(employeeId, !isEnrolled),
+                                            onPressed: () => FirebaseService.updateEnrollment(employeeId, !isEnrolled, context),
                                           ),
                                         ],
                                       ),

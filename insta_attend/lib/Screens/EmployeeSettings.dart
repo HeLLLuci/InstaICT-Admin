@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_attend/Database%20Services/FirestoreService.dart';
 import 'package:insta_attend/Widget/Animations/Loading.dart';
@@ -109,6 +110,7 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                                   onPressed: () => FirebaseService.updateEnrollment(
                                     employeeId,
                                     !isEnrolled,
+                                    context
                                   ),
                                 ),
                               ],
@@ -131,6 +133,7 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                                   onPressed: () => FirebaseService.updateGeoFencing(
                                     employeeId,
                                     !geoFencing,
+                                    context
                                   ),
                                 ),
                               ],

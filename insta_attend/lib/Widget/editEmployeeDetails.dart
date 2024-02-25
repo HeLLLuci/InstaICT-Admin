@@ -48,9 +48,80 @@ Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
                     value: 'Field worker',
                     child: Text('Field worker'),
                   ),
+                  DropdownMenuItem(
+                    value: 'MP (Madhyapradesh)',
+                    child: Text('MP (Madhyapradesh)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'UPW (UP West)',
+                    child: Text('UPW UP West'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'UPE (UP East)',
+                    child: Text('UPE UP East'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'RJ (Rajasthan)',
+                    child: Text('RJ Rajasthan'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'GUJ (Gujarat)',
+                    child: Text('GUJ Gujarat'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'MH (Maharashtra)',
+                    child: Text('MH Maharashtra'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Bihar',
+                    child: Text('Bihar'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'ROB (Rest of Bengal)',
+                    child: Text('ROB Rest of Bangal'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'KOL (Kolkata)',
+                    child: Text('KOL Kolkata'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'PNB (Punjab)',
+                    child: Text('PNB Punjab'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'HR (Haryana)',
+                    child: Text('HR Haryana'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'AP (Andhra pradesh)',
+                    child: Text('AP Andhra Pradesh'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'KTK (Karnataka)',
+                    child: Text('KTK Karnataka'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'ROTN (Rest of Tamil Nadu)',
+                    child: Text('ROTN Rest of Tamil Nadu'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'KE (Kerala)',
+                    child: Text('KE Kerala'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Chennai',
+                    child: Text('Chennai'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'MUM (Mumbai)',
+                    child: Text('MUM Mumbai'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'JH (Jharkhand)',
+                    child: Text('JH Jharkhand'),
+                  ),
                 ],
                 onChanged: (value) {
-                  // Update employeeType in the employeeData map
                   employeeData['employeeType'] = value;
                 },
               ),

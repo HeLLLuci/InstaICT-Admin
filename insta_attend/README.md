@@ -24,13 +24,13 @@ In this project we intend to deliver the admin panel / dashboard through which t
 
 -------------------------------------------------------------------
 
-## Developer's Team
+## Developer
+  
+**Mustkeem Baraskar**  
 
-* **Mustkeem Baraskar** - Flutter Development, Buisness Logic, UI-Backend Connectivity, Database connectivity and logic.
-* **Rohini Raut** - UI/UX Designing.
-* **Gaurav Birajdar** - Documentation, Database Architecture Design.
-* **Sakshi Rajurkar** - UI Development.
-* **Khushi Dhotre** - Blueprint drawings.
+[GitHub](https://github.com/HeLLLuci)  
+[Whatsapp](https://wa.me/919021706986)  
+[LinkedIn](https://www.linkedin.com/in/mustkeem-baraskar-98628b24b/)
 
 
 -------------------------------------------------------------------
@@ -58,4 +58,20 @@ Click on run button or run command "flutter run -device".
 Build web project using command flutter build web.
 
 **Step-2**
-Deploy the website using command firebase deploy.
+Deploy the website using command firebase deploy.  
+  
+  
+TODO  
+ADD code  
+itemList = [
+[
+'Employee Name',
+'Date',
+'Check-In Time',
+'Check-In Location',
+'Check-Out Time',
+'Check-Out Location',
+'Duration',
+'Status'
+]];  
+to generateCSV method in order to remove redundancy in list data structure.

@@ -20,6 +20,8 @@ dependencies:
   download: ^1.0.0
   universal_html: ^2.2.4
   lottie: ^3.0.0
+  csv: ^5.1.1
+  flutter_slidable: ^3.0.1
 
 dev_dependencies:
   flutter_test:

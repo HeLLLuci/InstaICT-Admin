@@ -23,14 +23,18 @@ class FirebaseService {
         .snapshots();
   }
 
-  static Future<void> updateEnrollment(String employeeId, bool isEnrolled) async {
+  static Future<void> updateEnrollment(String employeeId, bool isEnrolled, BuildContext context) async {
     try {
       await _firestore.collection('employeeDetails').doc(employeeId).update({
         'isEnrolled': isEnrolled,
       });
-      print('Enrollment updated successfully for $employeeId.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Enrollment updated')),
+      );
     } catch (error) {
-      print('Error updating enrollment: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update')),
+      );
     }
   }
   static Future<void> deleteEmployee(String employeeId, BuildContext context) async {
@@ -50,7 +54,6 @@ class FirebaseService {
                 ElevatedButton(
                     onPressed: (){
                   try {
-                    FirebaseAuth.instance.currentUser?.delete();
                     FirebaseFirestore.instance
                         .collection('employeeDetails')
                         .doc(employeeId)
@@ -110,7 +113,7 @@ class FirebaseService {
                     Text("Email ID: $email"),
                     SizedBox(height: 10,),
                     ElevatedButton(onPressed: (){
-                      FirebaseService.updateEnrollment(employeeId, !isEnrolled);
+                      FirebaseService.updateEnrollment(employeeId, !isEnrolled, context);
                       Navigator.of(context).pop();
                     }, child: Text("Enroll"))
                   ],
@@ -124,14 +127,18 @@ class FirebaseService {
     }
   }
 
-  static Future<void> updateGeoFencing(String employeeId, bool geoFencing) async {
+  static Future<void> updateGeoFencing(String employeeId, bool geoFencing, BuildContext context) async {
     try {
       await _firestore.collection('employeeDetails').doc(employeeId).update({
         'geoFencing': geoFencing,
       });
-      print('Geofencing updated successfully for $employeeId.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Geo Fencing updated successfully")),
+      );
     } catch (error) {
-      print('Error updating: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to update geoFencing")),
+      );
     }
   }
 }
