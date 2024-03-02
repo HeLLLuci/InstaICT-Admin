@@ -5,9 +5,10 @@ import '../../Database Services/FirestoreService.dart';
 import '../../configurations/CardTextStyle.dart';
 import '../Widget/Animations/Loading.dart';
 
+/******** Class to show in-active employee Card ********/
+
 class inActiveEmployeeCard extends StatefulWidget {
   const inActiveEmployeeCard({super.key});
-
   @override
   State<inActiveEmployeeCard> createState() => _inActiveEmployeeCardState();
 }
@@ -25,7 +26,7 @@ class _inActiveEmployeeCardState extends State<inActiveEmployeeCard> {
               Row(
                 children: [
                   Icon(
-                    Icons.comment,
+                    Icons.comments_disabled,
                     size: 20.0,
                     color: Colors.black,
                   ),

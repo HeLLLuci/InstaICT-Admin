@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:insta_attend/EmployeeData/Tables/employeeDetailTable.dart';
 
+/******** Class to show employee details table ********/
+
 class EmployeeDetails extends StatefulWidget {
   const EmployeeDetails({super.key});
 
@@ -23,7 +25,6 @@ class _EmployeeDetailsState extends State<EmployeeDetails> {
             width: 500,
             child: Card(
               child: ListTile(
-                leading: Icon(Icons.people_alt, size: 50,),
                 title: Text("Employee Details",
                   style: TextStyle(
                     fontSize: 30,

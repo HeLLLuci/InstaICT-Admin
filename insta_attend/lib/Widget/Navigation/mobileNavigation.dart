@@ -7,6 +7,8 @@ import '../../Screens/EmployeeDetails.dart';
 import '../../Screens/EmployeeSettings.dart';
 import '../../Screens/EnrollmentRequest.dart';
 
+/******** Bottom Navigation bar for Mobile screens ********/
+
 class mobileNavigation extends StatefulWidget {
   const mobileNavigation({super.key});
 

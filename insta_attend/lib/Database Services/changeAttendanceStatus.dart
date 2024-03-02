@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChangeAttendanceStatus {
+
+  /**********  Method to update the attendance status  **********/
+
   static Future<void> showEditDialog(BuildContext context, DocumentSnapshot document) async {
     String selectedStatus = (document.data() as Map<String, dynamic>)['Status'] ?? '';
     await showDialog(
@@ -48,6 +51,8 @@ class ChangeAttendanceStatus {
       },
     );
   }
+
+  /*********  Method that takes selected Item from dropdown and set it to database *********/
 
   static void updateStatus(DocumentSnapshot document, String selectedStatus) {
     FirebaseFirestore.instance.collection('attendance').doc(document.id).update({

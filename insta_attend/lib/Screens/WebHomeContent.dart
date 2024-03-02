@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../EmployeeData/Tables/employeeDetailTable.dart';
 
+/******** Web screen Layout home content ********/
+
 class WebHomeContent extends StatefulWidget {
   const WebHomeContent({super.key});
 

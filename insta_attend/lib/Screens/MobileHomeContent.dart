@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+/******** Mobile Screen layout ********/
+
 class MobileHomeContent extends StatelessWidget {
   const MobileHomeContent({super.key});
 

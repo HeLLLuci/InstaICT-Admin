@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_attend/Database%20Services/FirestoreService.dart';
 import 'package:insta_attend/Widget/Animations/Loading.dart';
 import 'package:insta_attend/Widget/editEmployeeDetails.dart';
+
+/******** Class to edit employee details ********/
 
 class EmployeeSetting extends StatefulWidget {
   const EmployeeSetting({Key? key});
@@ -41,10 +42,6 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
                 width: 300,
                 child: Card(
                   child: ListTile(
-                    leading: Icon(
-                      Icons.person_add_alt_1,
-                      size: 50,
-                    ),
                     title: Text(
                       "Employee",
                       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),

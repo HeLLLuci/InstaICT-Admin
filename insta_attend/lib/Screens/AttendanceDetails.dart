@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../EmployeeData/Tables/employeeAttendanceTable.dart';
 
+/******** Class to Attendance Details where i called attendance table ********/
+
 class AttendanceDetails extends StatefulWidget {
   const AttendanceDetails({super.key});
 
@@ -23,7 +25,6 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                 width: 500,
                 child: Card(
                   child: ListTile(
-                    leading: Icon(Icons.calendar_month, size: 50,),
                     title: Text("Attendance Details",
                       style: TextStyle(
                           fontSize: 30,

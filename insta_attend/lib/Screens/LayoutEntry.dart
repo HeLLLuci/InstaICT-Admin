@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:insta_attend/Widget/Navigation/WebNavigation.dart';
 import 'package:insta_attend/Widget/Navigation/mobileNavigation.dart';
 
+/******** Class for Layout entry of mobile and desktop web view ********/
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

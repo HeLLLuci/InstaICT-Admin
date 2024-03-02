@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:insta_attend/Database%20Services/changeAttendanceStatus.dart';
 
+
+/********** Class which shows attendance records ( only Employee Name, Date and Status)
+ * ******** It first fetch records from database then implements update function on click of button next to each record *********/
+
 class changeAttendanceTable extends StatefulWidget {
   const changeAttendanceTable({Key? key}) : super(key: key);
-
   @override
   State<changeAttendanceTable> createState() => _changeAttendanceTableState();
 }
-
 class _changeAttendanceTableState extends State<changeAttendanceTable> {
   late List<DocumentSnapshot> filteredDocuments;
   TextEditingController searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -24,16 +25,13 @@ class _changeAttendanceTableState extends State<changeAttendanceTable> {
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         }
-
         final documents = snapshot.data!.docs;
         filteredDocuments = List.from(documents);
 
         if (documents.isEmpty) {
           return Center(child: Text('No data available.'));
         }
-
         List<String> columnOrder = ['Employee Name', 'Date', 'Status'];
-
         if (searchController.text.isNotEmpty) {
           filteredDocuments = documents.where((document) {
             bool containsSearchQuery = false;
@@ -48,7 +46,6 @@ class _changeAttendanceTableState extends State<changeAttendanceTable> {
             return containsSearchQuery;
           }).toList();
         }
-
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,57 +120,5 @@ class _changeAttendanceTableState extends State<changeAttendanceTable> {
         );
       },
     );
-  }
-
-  Future<void> _showEditDialog(DocumentSnapshot document) async {
-    String selectedStatus = (document.data() as Map<String, dynamic>)['Status'] ?? '';
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Edit Status'),
-          content: Column(
-            children: [
-              DropdownButton<String>(
-                value: selectedStatus,
-                items: ['Present', 'Half-Day', 'Absent']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? value) {
-                  setState(() {
-                    selectedStatus = value!;
-                  });
-                },
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                _updateStatus(document, selectedStatus);
-                Navigator.of(context).pop();
-              },
-              child: Text('Update'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _updateStatus(DocumentSnapshot document, String selectedStatus) {
-    FirebaseFirestore.instance.collection('attendance').doc(document.id).update({
-      'Status': selectedStatus,
-    });
   }
 }

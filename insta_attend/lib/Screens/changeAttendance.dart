@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../EmployeeData/Tables/changeAttendanceTable.dart';
+
+/******** Class to show change attendance screen ********/
 
 class ChangeAttendance extends StatefulWidget {
   const ChangeAttendance({super.key});
@@ -24,7 +25,6 @@ class _ChangeAttendanceState extends State<ChangeAttendance> {
             width: 500,
             child: Card(
               child: ListTile(
-                leading: Icon(Icons.calendar_month, size: 50,),
                 title: Text("Attendance Details",
                   style: TextStyle(
                       fontSize: 30,

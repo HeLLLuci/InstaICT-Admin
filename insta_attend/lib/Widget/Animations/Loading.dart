@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+/******** Widget for loading animation ********/
+
 class LoadingAnimation extends StatefulWidget {
   const LoadingAnimation({super.key});
 

@@ -4,6 +4,8 @@ import '../../EmployeeData/AllEmployeeCard.dart';
 import '../../EmployeeData/activeEmployeeCard.dart';
 import '../../EmployeeData/inActiveEmployeeCard.dart';
 
+/******** Class carousel view in mobile screen ********/
+
 class CardCarousel extends StatefulWidget {
   const CardCarousel({super.key});
 

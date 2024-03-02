@@ -5,6 +5,8 @@ import '../../Database Services/FirestoreService.dart';
 import '../../configurations/CardTextStyle.dart';
 import '../Widget/Animations/Loading.dart';
 
+/******** Class to show active employee Card ********/
+
 class activeEmployeeCard extends StatefulWidget {
   const activeEmployeeCard({super.key});
 

@@ -10,6 +10,8 @@ class EnrollmentRequest extends StatefulWidget {
   State<EnrollmentRequest> createState() => _EnrollmentRequestState();
 }
 
+/******** Class to update enrollment of the employee ********/
+
 class _EnrollmentRequestState extends State<EnrollmentRequest> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -41,10 +43,6 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                     width: 300,
                     child: Card(
                       child: ListTile(
-                        leading: Icon(
-                          Icons.done_all,
-                          size: 50,
-                        ),
                         title: Text(
                           "Enrollment",
                           style: CardTextStyle.titleMobileStyle,

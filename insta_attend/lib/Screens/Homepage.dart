@@ -4,6 +4,8 @@ import 'package:insta_attend/Widget/Card/CardCarousel.dart';
 import 'package:insta_attend/Screens/WebHomeContent.dart';
 import '../Widget/Card/CardDetails.dart';
 
+/******** Class to show Homescreen ********/
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 

@@ -5,6 +5,8 @@ import 'package:insta_attend/Widget/Animations/Loading.dart';
 import '../../Database Services/FirestoreService.dart';
 import '../../configurations/CardTextStyle.dart';
 
+/******** Class to show all employee Card ********/
+
 class AllEmployeeCard extends StatefulWidget {
   const AllEmployeeCard({super.key});
 

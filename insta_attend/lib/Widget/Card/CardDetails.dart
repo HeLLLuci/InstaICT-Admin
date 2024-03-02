@@ -5,6 +5,8 @@ import '../../Database Services/FirestoreService.dart';
 import '../../EmployeeData/activeEmployeeCard.dart';
 import '../../EmployeeData/inActiveEmployeeCard.dart';
 
+/******** Class for card view in desktop screen ********/
+
 
 class CardDetails extends StatelessWidget {
   const CardDetails({super.key});

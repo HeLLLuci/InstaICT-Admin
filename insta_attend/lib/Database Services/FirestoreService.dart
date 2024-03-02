@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseService {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  /********** Method to fetch number of total employees(Active, Inactive) ***********/
+
   static Stream<QuerySnapshot> getEmployeeDetails() {
     return _firestore.collection('employeeDetails').snapshots();
   }
+
+  /********** Method to fetch active employee *********/
 
   static Stream<QuerySnapshot> getActiveEmployees() {
     return _firestore
@@ -16,12 +19,16 @@ class FirebaseService {
         .snapshots();
   }
 
+  /********** Method to fetch in-active employee *********/
+
   static Stream<QuerySnapshot> getInActiveEmployees(){
     return _firestore
         .collection('employeeDetails')
         .where('isEnrolled', isEqualTo: false)
         .snapshots();
   }
+
+  /********** Method to update Enrollment *********/
 
   static Future<void> updateEnrollment(String employeeId, bool isEnrolled, BuildContext context) async {
     try {
@@ -37,6 +44,9 @@ class FirebaseService {
       );
     }
   }
+
+  /********** Method to delete employee *********/
+
   static Future<void> deleteEmployee(String employeeId, BuildContext context) async {
     await showDialog(context: context, builder: (context) => AlertDialog(
       title: Text("Think twice"),
@@ -85,6 +95,8 @@ class FirebaseService {
     ));
   }
 
+  /********** Method to update employee details *********/
+
   static Future<void> showPopUp(String employeeId, bool isEnrolled, BuildContext context) async {
     try {
       final doc = await _firestore.collection('employeeDetails').doc(employeeId).get();
@@ -126,6 +138,8 @@ class FirebaseService {
       print('Error getting employee details: $error');
     }
   }
+
+  /********** Method to update geo-fencing *********/
 
   static Future<void> updateGeoFencing(String employeeId, bool geoFencing, BuildContext context) async {
     try {

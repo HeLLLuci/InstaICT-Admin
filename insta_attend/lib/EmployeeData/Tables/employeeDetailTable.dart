@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_attend/Widget/Animations/Loading.dart';
 
+
+/********** Class which simply fetches employee details and represents them in tabular form *********/
+
 class employeeDetailTable extends StatefulWidget {
   const employeeDetailTable({Key? key});
 
@@ -35,7 +38,7 @@ class _employeeDetailTableState extends State<employeeDetailTable> {
         }
 
         List<String> columnOrder = ['username', 'email', 'phoneNumber','employeeType', 'isEnrolled', 'geoFencing'];
-        List<String> columnList = ["Employee Name", "Email", "Phone Number","Employee Type", "Activation", "GeoFencing"];
+        List<String> columnList = ["Employee Name", "Email", "Phone Number","Circle", "Activation", "GeoFencing"];
 
         if (searchController.text.isNotEmpty) {
           filteredDocuments = documents.where((document) {
@@ -94,17 +97,6 @@ class _employeeDetailTableState extends State<employeeDetailTable> {
             ),
             SizedBox(
               height: 40.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    //TODO pagination logic to be applied
-                  },
-                  child: Text('Load More'),
-                ),
-              ],
             ),
           ],
         );

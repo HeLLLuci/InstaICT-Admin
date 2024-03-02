@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/******** Class to Download attendance report but now not usable in code ********/
 
 final db = FirebaseFirestore.instance;
 List<List<String>> itemList = [];
@@ -54,25 +55,32 @@ class _DownloadFileState extends State<DownloadFile> {
                   ),
                   ElevatedButton(onPressed: (){
                     generateCSV();
+                    print(snapshot.data!.docs.length);
+                    print(itemList.length);
+                    print(itemList.length);
+                    for (List<String> item in itemList) {
+                      print(item);
+
+                    }
                   }, child: Text("Download")),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("These are the Records to be downlaoded"),
+                  Text("These are the Records to be downloaded"),
                   Expanded(
                     child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index){
                           DocumentSnapshot doc = snapshot.data!.docs[index];
-                          itemList.add(<String>[
-                            doc.get('Employee Name'),
-                            doc.get('Date'),
-                            doc.get('Check-In Time'),
-                            doc.get('Check-In Location'),
-                            doc.get('Check-Out Time'),
-                            doc.get('Check-Out Location'),
-                            doc.get('Duration'),
-                            doc.get('Status')]);
+                            itemList.add(<String>[
+                              doc.get('Employee Name'),
+                              doc.get('Date'),
+                              doc.get('Check-In Time'),
+                              doc.get('Check-In Location'),
+                              doc.get('Check-Out Time'),
+                              doc.get('Check-Out Location'),
+                              doc.get('Duration'),
+                              doc.get('Status')]);
 
                           return Slidable(
                               child: Padding(
@@ -124,18 +132,14 @@ class _DownloadFileState extends State<DownloadFile> {
             );
           }
         }
-
     );
   }
 }
 
 generateCSV() {
-  print("GENERATE CSV WAS CLICKED");
-
   String csvData = ListToCsvConverter().convert(itemList);
   DateTime now = DateTime.now();
   if (kIsWeb) {
-    print("Registered as Web");
     final byte = utf8.encode(csvData);
     final blob = html.Blob([byte]);
     final url = html.Url.createObjectUrlFromBlob(blob);

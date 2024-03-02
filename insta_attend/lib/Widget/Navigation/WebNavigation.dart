@@ -8,6 +8,8 @@ import '../../Screens/EmployeeDetails.dart';
 import '../../Screens/EmployeeSettings.dart';
 import '../../Screens/EnrollmentRequest.dart';
 
+/******** Web Navigation for Web screens********/
+
 
 class WebNavigation extends StatefulWidget {
   const WebNavigation({super.key});
@@ -27,7 +29,6 @@ class _WebNavigationState extends State<WebNavigation> {
     EmployeeSetting(),
     EnrollmentRequest(),
     ChangeAttendance(),
-    DownloadFile()
   ];
   @override
   Widget build(BuildContext context) {
@@ -103,10 +104,6 @@ class _WebNavigationState extends State<WebNavigation> {
                 NavigationRailDestination(
                   icon: Icon(Icons.edit_calendar_outlined),
                   label: Text("Change Attendance Record"),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.download),
-                  label: Text("Download Reports"),
                 ),
               ],
               selectedIndex: _selectedIndex,

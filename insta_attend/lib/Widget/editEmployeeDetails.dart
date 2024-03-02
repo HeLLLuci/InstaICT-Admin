@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+/******** Future function to edit employee Details ********/
+
 Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
   try {
     final doc = await FirebaseFirestore.instance.collection('employeeDetails').doc(employeeId).get();
@@ -16,7 +18,15 @@ Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Edit Employee Details"),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Edit Employee Details"),
+            IconButton(onPressed: (){
+              Navigator.of(context).pop();
+            }, icon: Icon(Icons.close))
+          ],
+        ),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +138,6 @@ Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () async {
-                  // Validate inputs before updating
                   if (username == null || username!.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Please enter a name')),
