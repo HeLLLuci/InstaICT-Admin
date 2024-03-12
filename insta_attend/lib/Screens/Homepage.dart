@@ -20,38 +20,18 @@ class _HomeState extends State<Home> {
 
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      child: Row(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://mighty.tools/mockmind-api/content/human/57.jpg"),
-                      radius: 20.0,
-                    ),
-                    margin: EdgeInsets.all(10.0),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  (screenWidth < 1250) ? CardCarousel() : CardDetails(),
-                  SizedBox(
-                    height: 30.0,
-                  ),
+    return ListView(
+      children: [
+        SizedBox(
+          height: 20.0,
+        ),
+        (screenWidth < 950) ? CardCarousel() : CardDetails(),
+        SizedBox(
+          height: 30.0,
+        ),
 
-                  screenWidth > 1250 ? WebHomeContent() : MobileHomeContent()
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        screenWidth > 950 ? WebHomeContent() : MobileHomeContent()
+      ],
     );
   }
 }

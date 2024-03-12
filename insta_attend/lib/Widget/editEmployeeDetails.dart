@@ -6,14 +6,17 @@ import 'package:flutter/material.dart';
 Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
   try {
     final doc = await FirebaseFirestore.instance.collection('employeeDetails').doc(employeeId).get();
+    final circleDocs = await FirebaseFirestore.instance.collection('Circle').get();
     final employeeData = doc.data() as Map<String, dynamic>;
-
     var username = employeeData['username'] as String?;
     var phoneNumber = employeeData['phoneNumber'] as String?;
     final email = employeeData['email'] as String?;
+
     if (username == null || phoneNumber == null || email == null) {
       return;
     }
+
+    List<String> circleDocumentIds = circleDocs.docs.map((doc) => doc.id).toList();
 
     await showDialog(
       context: context,
@@ -22,7 +25,7 @@ Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Edit Employee Details"),
-            IconButton(onPressed: (){
+            IconButton(onPressed: () {
               Navigator.of(context).pop();
             }, icon: Icon(Icons.close))
           ],
@@ -46,93 +49,17 @@ Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
                 onChanged: (value) => phoneNumber = value,
               ),
               SizedBox(height: 10),
-              Text("Employee Type:"),
+              Text("Employment Type:"),
               DropdownButtonFormField<String>(
-                value: employeeData['employeeType'] as String?,
-                items: <DropdownMenuItem<String>>[
-                  DropdownMenuItem(
-                    value: 'Corporate employee',
-                    child: Text('Corporate employee'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Field worker',
-                    child: Text('Field worker'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'MP (Madhyapradesh)',
-                    child: Text('MP (Madhyapradesh)'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'UPW (UP West)',
-                    child: Text('UPW UP West'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'UPE (UP East)',
-                    child: Text('UPE UP East'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'RJ (Rajasthan)',
-                    child: Text('RJ Rajasthan'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'GUJ (Gujarat)',
-                    child: Text('GUJ Gujarat'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'MH (Maharashtra)',
-                    child: Text('MH Maharashtra'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Bihar',
-                    child: Text('Bihar'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'ROB (Rest of Bengal)',
-                    child: Text('ROB Rest of Bangal'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'KOL (Kolkata)',
-                    child: Text('KOL Kolkata'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'PNB (Punjab)',
-                    child: Text('PNB Punjab'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'HR (Haryana)',
-                    child: Text('HR Haryana'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'AP (Andhra pradesh)',
-                    child: Text('AP Andhra Pradesh'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'KTK (Karnataka)',
-                    child: Text('KTK Karnataka'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'ROTN (Rest of Tamil Nadu)',
-                    child: Text('ROTN Rest of Tamil Nadu'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'KE (Kerala)',
-                    child: Text('KE Kerala'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Chennai',
-                    child: Text('Chennai'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'MUM (Mumbai)',
-                    child: Text('MUM Mumbai'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'JH (Jharkhand)',
-                    child: Text('JH Jharkhand'),
-                  ),
-                ],
+                value: employeeData['Circle'] as String?,
+                items: circleDocumentIds.map((circleId) {
+                  return DropdownMenuItem(
+                    value: circleId,
+                    child: Text(circleId),
+                  );
+                }).toList(),
                 onChanged: (value) {
-                  employeeData['employeeType'] = value;
+                  employeeData['Circle'] = value;
                 },
               ),
               SizedBox(height: 10),
@@ -151,18 +78,15 @@ Future<void> editEmployeeDetail(String employeeId, BuildContext context) async {
                     return;
                   }
 
-                  // Create a new map for update
                   Map<String, dynamic> updateData = {
                     'username': username,
                     'phoneNumber': phoneNumber,
-                    'employeeType': employeeData['employeeType'],
+                    'Circle': employeeData['Circle'],
                   };
-
                   await FirebaseFirestore.instance
                       .collection('employeeDetails')
                       .doc(employeeId)
                       .update(updateData);
-
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Employee details updated')),

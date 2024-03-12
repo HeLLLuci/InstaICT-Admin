@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta_attend/Screens/accountDeleteRequest.dart';
 import 'package:insta_attend/Screens/changeAttendance.dart';
 
 import '../../Screens/Homepage.dart';
@@ -27,7 +28,8 @@ class _mobileNavigationState extends State<mobileNavigation> {
     AttendanceDetails(),
     EmployeeSetting(),
     EnrollmentRequest(),
-    ChangeAttendance()
+    ChangeAttendance(),
+    DeleteRequest(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -86,6 +88,9 @@ class _mobileNavigationState extends State<mobileNavigation> {
           ),BottomNavigationBarItem(
               icon: Icon(Icons.edit_calendar_outlined),
               label: "Change Attendance Record",
+          ),BottomNavigationBarItem(
+              icon: Icon(Icons.delete_outline_rounded),
+              label: "Requests for Delete Account",
           ),
         ],
       ),

@@ -5,45 +5,35 @@ import '../EmployeeData/Tables/changeAttendanceTable.dart';
 
 class ChangeAttendance extends StatefulWidget {
   const ChangeAttendance({super.key});
-
   @override
   State<ChangeAttendance> createState() => _ChangeAttendanceState();
 }
-
 class _ChangeAttendanceState extends State<ChangeAttendance> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: 500,
-            child: Card(
-              child: ListTile(
-                title: Text("Attendance Details",
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-                subtitle: Text("Attendance Record"),
-              ),
+    return ListView(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        ListTile(
+          title: Text("Attendance Details",
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold
             ),
           ),
-          SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: changeAttendanceTable(),
-          )
-        ],
-      ),
+          subtitle: Text("Change Status"),
+        ),
+        Divider(color: Colors.grey,),
+        SizedBox(
+          height: 30,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: changeAttendanceTable(),
+        )
+      ],
     );
   }
 }

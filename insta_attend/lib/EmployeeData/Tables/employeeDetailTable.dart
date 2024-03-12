@@ -37,7 +37,7 @@ class _employeeDetailTableState extends State<employeeDetailTable> {
           return Center(child: Text('No data available.'));
         }
 
-        List<String> columnOrder = ['username', 'email', 'phoneNumber','employeeType', 'isEnrolled', 'geoFencing'];
+        List<String> columnOrder = ['username', 'email', 'phoneNumber','Circle', 'isEnrolled', 'geoFencing'];
         List<String> columnList = ["Employee Name", "Email", "Phone Number","Circle", "Activation", "GeoFencing"];
 
         if (searchController.text.isNotEmpty) {

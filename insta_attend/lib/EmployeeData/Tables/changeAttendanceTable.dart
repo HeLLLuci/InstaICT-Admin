@@ -55,7 +55,8 @@ class _changeAttendanceTableState extends State<changeAttendanceTable> {
               child: TextField(
                 controller: searchController,
                 onSubmitted: (value) {
-                  setState(() {});
+                  setState(() {
+                  });
                 },
                 decoration: InputDecoration(
                   hintText: "Search",

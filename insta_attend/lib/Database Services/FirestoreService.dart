@@ -155,4 +155,19 @@ class FirebaseService {
       );
     }
   }
+
+  static Future<void> updateDeleteRequest(String employeeId, dynamic request, BuildContext context) async {
+    try {
+      await _firestore.collection('employeeDetails').doc(employeeId).update({
+        'deletePermission': request,
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Request updated')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update')),
+      );
+    }
+  }
 }

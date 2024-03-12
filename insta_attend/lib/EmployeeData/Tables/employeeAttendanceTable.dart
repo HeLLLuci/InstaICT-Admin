@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
+import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:universal_html/html.dart' as html;
 
 class employeeAttendanceTable extends StatefulWidget {
@@ -124,31 +125,73 @@ class _employeeAttendanceTableState extends State<employeeAttendanceTable> {
               SizedBox(
                 width: 20,
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  await _selectDateRange(context);
-                },
-                child: Text("Select Date Range"),
-              ),
+              AnimatedButton(
+                  borderColor: Color(0xFF1c9ef6),
+                  backgroundColor: Colors.transparent,
+                  selectedTextColor: Colors.white,
+                  borderRadius: 15,
+                  selectedGradientColor: LinearGradient(colors: [
+                    Color(0xFF1bc4fa),
+                    Color(0xFF1d78f2)
+                  ],
+                      begin: Alignment.topCenter,end: Alignment.bottomCenter),
+                  width: 200,
+                  animatedOn: AnimatedOn.onHover,
+                  transitionType: TransitionType.CENTER_ROUNDER,
+                  text: "Select Date Range",
+                  textStyle: TextStyle(
+                      color: Color(0xFF1d78f2)
+                  ),
+                  onPress: () async{
+                    await _selectDateRange(context);
+                  }),
               SizedBox(
                 width: 10,
               ),
               if (startDate != null && endDate != null)
-                ElevatedButton(
-                  onPressed: () {
-                    _clearDateRange();
-                  },
-                  child: Text("Clear Date Range"),
-                ),
+                AnimatedButton(
+                    borderColor: Color(0xFF1c9ef6),
+                    backgroundColor: Colors.transparent,
+                    selectedTextColor: Colors.white,
+                    borderRadius: 15,
+                    selectedGradientColor: LinearGradient(colors: [
+                      Color(0xFF1bc4fa),
+                      Color(0xFF1d78f2)
+                    ],
+                        begin: Alignment.topCenter,end: Alignment.bottomCenter),
+                    width: 200,
+                    animatedOn: AnimatedOn.onHover,
+                    transitionType: TransitionType.CENTER_ROUNDER,
+                    text: "Clear Date Range",
+                    textStyle: TextStyle(
+                        color: Color(0xFF1d78f2)
+                    ),
+                    onPress: (){
+                      _clearDateRange();
+                    }),
               SizedBox(
                 width: 10,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  downloadCSV();
-                },
-                child: Text("Download"),
-              ),
+              AnimatedButton(
+                  borderColor: Color(0xFF1c9ef6),
+                  backgroundColor: Colors.transparent,
+                  selectedTextColor: Colors.white,
+                  borderRadius: 15,
+                  selectedGradientColor: LinearGradient(colors: [
+                    Color(0xFF1bc4fa),
+                    Color(0xFF1d78f2)
+                  ],
+                      begin: Alignment.topCenter,end: Alignment.bottomCenter),
+                  width: 200,
+                  animatedOn: AnimatedOn.onHover,
+                  transitionType: TransitionType.CENTER_ROUNDER,
+                  text: "Download Report",
+                  textStyle: TextStyle(
+                      color: Color(0xFF1d78f2)
+                  ),
+                  onPress: (){
+                    downloadCSV();
+                  }),
             ],
           ),
         ),
@@ -317,9 +360,9 @@ class _employeeAttendanceTableState extends State<employeeAttendanceTable> {
 
           (document.data() as Map<String, dynamic>)['Employee Name']?.toString() ?? '',
           (document.data() as Map<String, dynamic>)['Date']?.toString() ?? '',
-          (document.data() as Map<String, dynamic>)['Check-In Time']?.toString() ?? '',
+          (document.data() as Map<String, dynamic>)['CheckIn_Time']?.toString() ?? '',
           (document.data() as Map<String, dynamic>)['Check-In Location']?.toString() ?? '',
-          (document.data() as Map<String, dynamic>)['Check-Out Time']?.toString() ?? '',
+          (document.data() as Map<String, dynamic>)['CheckIn_Time']?.toString() ?? '',
           (document.data() as Map<String, dynamic>)['Check-Out Location']?.toString() ?? '',
           (document.data() as Map<String, dynamic>)['Duration']?.toString() ?? '',
           (document.data() as Map<String, dynamic>)['Status']?.toString() ?? '',

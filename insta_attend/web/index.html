@@ -20,22 +20,32 @@
   <title>Admin Dashboard</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
-    import { initializeApp } from "firebase/app";
-    import { getAnalytics } from "firebase/analytics";
-    import "firebase/compat/performance";
+  <!-- Remember to remove this tag-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6959408094694730"
+          crossorigin="anonymous"></script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
-      apiKey: "AIzaSyB0W1hjYZ8N7HkJa8Ghski2YkpVmuaMuBU",
-      authDomain: "attendance-management-50dfb.firebaseapp.com",
-      projectId: "attendance-management-50dfb",
-      storageBucket: "attendance-management-50dfb.appspot.com",
-      messagingSenderId: "953909964234",
-      appId: "1:953909964234:web:65bfd132fa17876ce53333",
-      measurementId: "G-SGFH8XCNMG"
+      apiKey: "AIzaSyBj4Ru3oX0d2XcUQ3yLKxu6O2HJ5fMkImc",
+      authDomain: "insta-ams.firebaseapp.com",
+      projectId: "insta-ams",
+      storageBucket: "insta-ams.appspot.com",
+      messagingSenderId: "990644961746",
+      appId: "1:990644961746:web:ca0b97d8f8189c9ae7080b",
+      measurementId: "G-NESRVQCSWC"
     };
+
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    const perf = firebase.performance();
   </script>
 
   <script>

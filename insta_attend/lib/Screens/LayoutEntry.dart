@@ -17,6 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    return (screenWidth < 1340) ? mobileNavigation() : WebNavigation();
+    return (screenWidth < 950) ? mobileNavigation() : WebNavigation();
   }
 }

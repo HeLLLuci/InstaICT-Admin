@@ -18,11 +18,19 @@ dependencies:
   firebase_auth: ^4.17.4
   cloud_firestore: ^4.15.4
   download: ^1.0.0
+  blurrycontainer: ^1.0.2
+  art_sweetalert: ^0.0.5
+  animated_text_kit: ^4.2.2
+  flutter_animated_button: ^2.0.3
+  loading_animation_widget: ^1.2.0+4
   universal_html: ^2.2.4
   lottie: ^3.0.0
+  shared_preferences:
   csv: ^5.1.1
+  admonitions: ^1.0.1
   intl:
   flutter_slidable: ^3.0.1
+  charts_flutter: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -47,9 +55,9 @@ flutter:
          - asset: assets/fonts/Roman.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+     - family: Typewriter
+       fonts:
+         - asset: assets/fonts/AniTypewriter.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

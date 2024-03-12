@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:insta_attend/Database%20Services/FirestoreService.dart';
 import 'package:insta_attend/configurations/CardTextStyle.dart';
 
-class EnrollmentRequest extends StatefulWidget {
-  const EnrollmentRequest({Key? key}) : super(key: key);
+class DeleteRequest extends StatefulWidget {
+  const DeleteRequest({Key? key}) : super(key: key);
 
   @override
-  State<EnrollmentRequest> createState() => _EnrollmentRequestState();
+  State<DeleteRequest> createState() => _DeleteRequestState();
 }
 
-class _EnrollmentRequestState extends State<EnrollmentRequest> {
+class _DeleteRequestState extends State<DeleteRequest> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -19,7 +19,7 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
           .collection('employeeDetails')
-          .where('isEnrolled', isEqualTo: false)
+          .where('deletePermission', isEqualTo: "false")
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -37,7 +37,7 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
             SizedBox(height: 20),
             ListTile(
               title: Text(
-                "Account Approval",
+                "Account Delete Request",
                 style: CardTextStyle.titleMobileStyle,
               ),
               subtitle: Text("Requests"),
@@ -62,8 +62,9 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                   final employeeName = employeeData['username'] as String?;
                   final employeeEmail = employeeData['email'] as String?;
                   final employeePhone = employeeData['phoneNumber'] as String?;
+                  final isEnrolled = employeeData['deletePermission'] as String?;
 
-                  if (employeeName == null || employeeEmail == null || employeePhone == null) {
+                  if (employeeName == null || isEnrolled == null || employeeEmail == null || employeePhone == null) {
                     return DataRow(cells: [DataCell(SizedBox.shrink()), DataCell(SizedBox.shrink())]);
                   }
 
@@ -87,50 +88,50 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                       ),
                       DataCell(
                         Text(
-                          "Requested to approve account",
+                          "Requested to delete account",
                         ),
                       ),
                       DataCell(
-                          Row(
-                            children: [
-                              IconButton(
-                                  icon: Icon(
-                                    Icons.done,
-                                    color: Colors.green,
-                                  ),
-                                  onPressed: () =>
-                                      ArtSweetAlert.show(
-                                        context: context,
-                                        artDialogArgs: ArtDialogArgs(
-                                            type: ArtSweetAlertType.warning,
-                                            title: "Are you sure",
-                                            text: "Do you want to approve following request?",
-                                            onConfirm: (){
-                                              FirebaseService.updateEnrollment(employeeId, true, context);
-                                              Navigator.of(context).pop();
-                                            },
-                                            onCancel: (){
-                                              FirebaseService.updateEnrollment(employeeId, false, context);
-                                              Navigator.of(context).pop();
-                                            },
-                                            showCancelBtn: true,
-                                            confirmButtonColor: Colors.green,
-                                            confirmButtonText: "Approve",
-                                            cancelButtonColor: Colors.red,
-                                            cancelButtonText: "Reject"
-                                        ),
-                                      )
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red,
                               ),
-                              IconButton(
-                                  icon: Icon(
-                                    Icons.close,
-                                    color: Colors.red,
-                                  ),
-                                  onPressed: () =>
-                                      FirebaseService.updateEnrollment(employeeId, false, context)
+                              onPressed: () =>
+                                  ArtSweetAlert.show(
+                                    context: context,
+                                    artDialogArgs: ArtDialogArgs(
+                                        type: ArtSweetAlertType.warning,
+                                        title: "Are you sure",
+                                        text: "Do you want to grant permission to delete user account ?",
+                                        onConfirm: (){
+                                          FirebaseService.updateDeleteRequest(employeeId, "true", context);
+                                          Navigator.of(context).pop();
+                                        },
+                                      onCancel: (){
+                                        FirebaseService.updateDeleteRequest(employeeId, null, context);
+                                        Navigator.of(context).pop();
+                                      },
+                                      showCancelBtn: true,
+                                      confirmButtonColor: Colors.red,
+                                      confirmButtonText: "Delete",
+                                      cancelButtonColor: Colors.green,
+                                      cancelButtonText: "Cancel"
+                                    ),
+                                  )
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: Colors.green,
                               ),
-                            ],
-                          )
+                              onPressed: () =>
+                                  FirebaseService.updateDeleteRequest(employeeId, null, context)
+                            ),
+                          ],
+                        )
                       ),
                     ],
                   );

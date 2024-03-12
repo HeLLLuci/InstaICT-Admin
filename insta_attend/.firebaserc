@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "attendance-management-50dfb"
-  }
+    "default": "insta-ams",
+    "insta-ams": "insta-ams"
+  },
+  "targets": {},
+  "etags": {}
 }

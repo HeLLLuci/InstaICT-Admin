@@ -1,14 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:insta_attend/Screens/LayoutEntry.dart';
+import 'Screens/LayoutEntry.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-        apiKey: "AIzaSyB0W1hjYZ8N7HkJa8Ghski2YkpVmuaMuBU",
-        appId: "1:953909964234:web:65bfd132fa17876ce53333",
-        messagingSenderId: "953909964234",
-        projectId: "attendance-management-50dfb",
+        apiKey: "AIzaSyBj4Ru3oX0d2XcUQ3yLKxu6O2HJ5fMkImc",
+        appId: "1:990644961746:web:ca0b97d8f8189c9ae7080b",
+        messagingSenderId: "990644961746",
+        projectId: "insta-ams",
     )
   );
   runApp(MyApp());
@@ -28,3 +29,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

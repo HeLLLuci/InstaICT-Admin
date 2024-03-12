@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-
-/******** Mobile Screen layout ********/
 
 class MobileHomeContent extends StatelessWidget {
   const MobileHomeContent({super.key});
@@ -10,7 +7,7 @@ class MobileHomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Lottie.asset("assets/Lottie/dashboard.json")
+
       ],
     );
   }

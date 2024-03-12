@@ -15,3 +15,7 @@ class CardTextStyle{
     fontWeight: FontWeight.bold,
   );
 }
+
+class DocNames{
+  static String docName = "";
+}
