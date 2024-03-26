@@ -19,3 +19,7 @@ class CardTextStyle{
 class DocNames{
   static String docName = "";
 }
+
+class controllers{
+  static ScrollController scrollController = ScrollController();
+}

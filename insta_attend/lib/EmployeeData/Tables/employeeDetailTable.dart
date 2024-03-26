@@ -26,6 +26,8 @@ class _employeeDetailTableState extends State<employeeDetailTable> {
               child: LoadingAnimation()
           );
         }
+
+        //firebase deploy
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         }
@@ -89,7 +91,13 @@ class _employeeDetailTableState extends State<employeeDetailTable> {
                     DataRow(
                       cells: [
                         for (var field in columnOrder)
-                          DataCell(Text((document.data() as Map<String, dynamic>)[field]?.toString() ?? '')),
+                          DataCell(
+                            field == 'isEnrolled' || field == 'geoFencing'
+                                ? Text(
+                              ((document.data() as Map<String, dynamic>)[field] ?? false) ? 'Active' : 'Inactive',
+                            )
+                                : Text((document.data() as Map<String, dynamic>)[field]?.toString() ?? ''),
+                          ),
                       ],
                     ),
                 ],

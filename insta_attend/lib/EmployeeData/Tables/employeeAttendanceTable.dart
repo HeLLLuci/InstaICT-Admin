@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:insta_attend/configurations/CardTextStyle.dart';
 import 'package:universal_html/html.dart' as html;
 
 class employeeAttendanceTable extends StatefulWidget {
@@ -16,6 +17,7 @@ class employeeAttendanceTable extends StatefulWidget {
 class _employeeAttendanceTableState extends State<employeeAttendanceTable> {
   late List<DocumentSnapshot> filteredDocuments;
   TextEditingController searchController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
   String selectedFilter = 'Date';
   String selectedOrder = 'Descending';
   DateTime? startDate;
@@ -260,38 +262,43 @@ class _employeeAttendanceTableState extends State<employeeAttendanceTable> {
               // Add logic to handle sorting by Status
             }
 
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                headingRowColor:
-                MaterialStateProperty.resolveWith((states) => Colors.grey.shade200),
-                columns: [
-                  for (var field in columnOrder)
-                    DataColumn(
-                      label: Text(
-                        field,
-                        style: TextStyle(fontSize: 12.0),
+            return Scrollbar(
+              controller: controllers.scrollController,
+              scrollbarOrientation: ScrollbarOrientation.top,
+              child: SingleChildScrollView(
+                controller: controllers.scrollController,
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  headingRowColor:
+                  MaterialStateProperty.resolveWith((states) => Colors.grey.shade200),
+                  columns: [
+                    for (var field in columnOrder)
+                      DataColumn(
+                        label: Text(
+                          field,
+                          style: TextStyle(fontSize: 12.0),
+                        ),
                       ),
-                    ),
-                ],
-                rows: [
-                  for (var document in filteredDocuments)
-                    if (_isDateInRange(document))
-                      DataRow(
-                        cells: [
-                          for (var field in columnOrder)
-                            DataCell(
-                              SizedBox(
-                                width: 150,
-                                child: Text(
-                                  (document.data() as Map<String, dynamic>)[field]?.toString() ?? '',
-                                  style: TextStyle(fontSize: 12.0),
+                  ],
+                  rows: [
+                    for (var document in filteredDocuments)
+                      if (_isDateInRange(document))
+                        DataRow(
+                          cells: [
+                            for (var field in columnOrder)
+                              DataCell(
+                                SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    (document.data() as Map<String, dynamic>)[field]?.toString() ?? '',
+                                    style: TextStyle(fontSize: 12.0),
+                                  ),
                                 ),
                               ),
-                            ),
-                        ],
-                      ),
-                ],
+                          ],
+                        ),
+                  ],
+                ),
               ),
             );
           },

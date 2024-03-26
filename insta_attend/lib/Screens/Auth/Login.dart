@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
@@ -111,10 +112,22 @@ class _LoginState extends State<Login> {
                           textStyle: TextStyle(
                             color: Color(0xFFfda085)
                           ),
-                          onPress: (){
-                        AuthService.loginUser(emailController.text, passwordController.text, context);
-                        emailController.clear();
-                        passwordController.clear();
+                          onPress: () async{
+                          if(emailController.text.isEmpty || passwordController.text.isEmpty){
+                            ArtSweetAlert.show(
+                              context: context,
+                              artDialogArgs: ArtDialogArgs(
+                                type: ArtSweetAlertType.danger,
+                                title: "Oops...",
+                                text: "All fields are required",
+                              ),
+                            );
+                            emailController.clear();
+                            passwordController.clear();
+                          }
+                        else{
+                            AuthService.loginUser(emailController.text, passwordController.text, context);
+                          }
                       })
                     ],
                   )),

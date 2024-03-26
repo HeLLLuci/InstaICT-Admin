@@ -11,9 +11,9 @@ class CardDetails extends StatelessWidget {
   Widget build(BuildContext context) {
         return Row(
           children: [
-            LaptopCard(stream: FirebaseService.getEmployeeDetails(), cardTitle: 'Total Employee',),
-            LaptopCard(stream: FirebaseService.getActiveEmployees(), cardTitle: 'Active Employee',),
-            LaptopCard(stream: FirebaseService.getInActiveEmployees(), cardTitle: 'In-Active Employee',),
+            LaptopCard(stream: FirebaseServices.getEmployeeDetails(), cardTitle: 'Total Employee',),
+            LaptopCard(stream: FirebaseServices.getActiveEmployees(), cardTitle: 'Active Employee',),
+            LaptopCard(stream: FirebaseServices.getInActiveEmployees(), cardTitle: 'In-Active Employee',),
           ],
         );
   }

@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_attend/Widget/mobile_data_card.dart';
+import 'package:insta_attend/Widget/mobile_data_card.dart';
+import 'package:insta_attend/Widget/mobile_data_card.dart';
 import '../../Database Services/FirestoreService.dart';
 import '../DataCard.dart';
 
@@ -15,9 +18,9 @@ class CardCarousel extends StatefulWidget {
 class _CardCarouselState extends State<CardCarousel> {
 
   final List<Widget> _items = [
-    LaptopCard(stream: FirebaseService.getEmployeeDetails(), cardTitle: 'Total Employee',),
-    LaptopCard(stream: FirebaseService.getActiveEmployees(), cardTitle: 'Active Employee',),
-    LaptopCard(stream: FirebaseService.getInActiveEmployees(), cardTitle: 'In-Active Employee',),
+    MobileCard(stream: FirebaseServices.getEmployeeDetails(), cardTitle: 'Total Employee',),
+    MobileCard(stream: FirebaseServices.getActiveEmployees(), cardTitle: 'Active Employee',),
+    MobileCard(stream: FirebaseServices.getInActiveEmployees(), cardTitle: 'In-Active Employee',),
   ];
 
   @override

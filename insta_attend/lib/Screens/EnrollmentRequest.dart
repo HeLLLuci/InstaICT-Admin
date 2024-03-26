@@ -106,11 +106,11 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                                             title: "Are you sure",
                                             text: "Do you want to approve following request?",
                                             onConfirm: (){
-                                              FirebaseService.updateEnrollment(employeeId, true, context);
+                                              FirebaseServices.updateEnrollment(employeeId, true, context);
                                               Navigator.of(context).pop();
                                             },
                                             onCancel: (){
-                                              FirebaseService.updateEnrollment(employeeId, false, context);
+                                              FirebaseServices.updateEnrollment(employeeId, false, context);
                                               Navigator.of(context).pop();
                                             },
                                             showCancelBtn: true,
@@ -127,7 +127,7 @@ class _EnrollmentRequestState extends State<EnrollmentRequest> {
                                     color: Colors.red,
                                   ),
                                   onPressed: () =>
-                                      FirebaseService.updateEnrollment(employeeId, false, context)
+                                      FirebaseServices.updateEnrollment(employeeId, false, context)
                               ),
                             ],
                           )

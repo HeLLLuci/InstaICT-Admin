@@ -4,8 +4,6 @@ import 'package:insta_attend/Database%20Services/FirestoreService.dart';
 import 'package:insta_attend/Widget/Animations/Loading.dart';
 import 'package:insta_attend/Widget/editEmployeeDetails.dart';
 
-/******** Class to edit employee details ********/
-
 class EmployeeSetting extends StatefulWidget {
   const EmployeeSetting({Key? key});
 
@@ -18,140 +16,133 @@ class _EmployeeSettingState extends State<EmployeeSetting> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('employeeDetails').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: LoadingAnimation());
-        }
-        if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        }
+    return ListView(children: [
+      ListTile(
+        title: Text(
+          "Attendance Details",
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(
+          "Activate-Deactivate user, Geofencing, Change employee details",
+        ),
+      ),
+      Divider(
+        color: Colors.grey,
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      StreamBuilder<QuerySnapshot>(
+        stream: _firestore.collection('employeeDetails').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: LoadingAnimation());
+          }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
 
-        final documents = snapshot.data!.docs;
+          final documents = snapshot.data!.docs;
 
-        return ListView(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            ListTile(
-              title: Text(
-                "Employee",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text("Settings"),
-            ),
-            Divider(color: Colors.grey,),
-            SizedBox(
-              height: 30,
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: documents.length,
-              itemBuilder: (context, index) {
-                final employeeData = documents[index].data() as Map<String, dynamic>?;
-                final employeeId = documents[index].id;
-                final employeeName = employeeData?['username'] as String?;
-                final employeeEmail = employeeData?['email'] as String?;
-                final employeePhone = employeeData?['phoneNumber'] as String?;
-                final isEnrolled = employeeData?['isEnrolled'] as bool?;
-                final geoFencing = employeeData?['geoFencing'] as bool?;
+          if (documents.isEmpty) {
+            return Center(child: Text('No data available.'));
+          }
 
-                if (employeeName == null
-                    || isEnrolled == null
-                    || geoFencing == null
-                    || employeePhone == null
-                    || employeeEmail == null) {
-                  return SizedBox.shrink();
-                }
-
-                return Container(
-                  width: 600,
-                  margin: EdgeInsets.all(8.0),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 8.0
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.purple.shade50
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        employeeName,
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  isEnrolled ? Icons.check_box : Icons.check_box_outline_blank,
-                                  color: Colors.green,
-                                ),
-                                onPressed: () => FirebaseService.updateEnrollment(
-                                  employeeId,
-                                  !isEnrolled,
-                                  context
-                                ),
-                              ),
-                            ],
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              headingRowColor: MaterialStateProperty.resolveWith(
+                  (states) => Colors.grey.shade200),
+              columns: [
+                DataColumn(label: Text("Employee Name")),
+                DataColumn(label: Text("Email")),
+                DataColumn(label: Text("Phone Number")),
+                DataColumn(label: Text("Activation")),
+                DataColumn(label: Text("GeoFencing")),
+                // DataColumn(label: Text("Admin Status")),
+                DataColumn(label: Text("Actions")),
+              ],
+              rows: [
+                for (var document in documents)
+                  DataRow(
+                    cells: [
+                      DataCell(Text(document['username'] ?? '')),
+                      DataCell(Text(document['email'] ?? '')),
+                      DataCell(Text(document['phoneNumber'] ?? '')),
+                      DataCell(
+                        IconButton(
+                          icon: Icon(
+                            document['isEnrolled']
+                                ? Icons.check_circle
+                                : Icons.cancel,
+                            color: document['isEnrolled']
+                                ? Colors.green
+                                : Colors.red,
                           ),
-                          Text("Enrollment")
-                        ],
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  geoFencing ? Icons.check_box : Icons.check_box_outline_blank,
-                                  color: Colors.blue,
-                                ),
-                                onPressed: () => FirebaseService.updateGeoFencing(
-                                  employeeId,
-                                  !geoFencing,
-                                  context
-                                ),
-                              ),
-                            ],
+                          onPressed: () => FirebaseServices.updateEnrollment(
+                            document.id,
+                            !document['isEnrolled'],
+                            context,
                           ),
-                          Text("Geofencing")
-                        ],
+                        ),
                       ),
-                      SizedBox(
-                        width: 30,
+                      DataCell(
+                        IconButton(
+                          icon: Icon(
+                            document['geoFencing']
+                                ? Icons.check_circle
+                                : Icons.cancel,
+                            color: document['geoFencing']
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                          onPressed: () => FirebaseServices.updateGeoFencing(
+                            document.id,
+                            !document['geoFencing'],
+                            context,
+                          ),
+                        ),
                       ),
-                      IconButton(onPressed: (){
-                        editEmployeeDetail(employeeId, context);
-                      }, icon: Icon(Icons.edit)),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      IconButton(onPressed: (){
-                        FirebaseService.deleteEmployee(employeeId, context);
-                      }, icon: Icon(Icons.delete, color: Colors.red,)
+                      // DataCell(
+                      //   IconButton(
+                      //     icon: Icon(
+                      //       document['isAdmin']
+                      //           ? Icons.check_circle
+                      //           : Icons.cancel,
+                      //       color: document['isAdmin']
+                      //           ? Colors.green
+                      //           : Colors.red,
+                      //     ),
+                      //     onPressed: () => FirebaseServices.updateAdminStatus(
+                      //       document.id,
+                      //       !document['isAdmin'],
+                      //       context,
+                      //     ),
+                      //   ),
+                      // ),
+                      DataCell(
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () =>
+                                  editEmployeeDetail(document.id, context),
+                              icon: Icon(Icons.edit),
+                            ),
+                            IconButton(
+                              onPressed: () => FirebaseServices.deleteEmployee(
+                                  document.id, context),
+                              icon: Icon(Icons.delete, color: Colors.red),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                );
-              },
+              ],
             ),
-          ],
-        );
-      },
-    );
+          );
+        },
+      ),
+    ]);
   }
 }

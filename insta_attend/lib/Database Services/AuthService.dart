@@ -17,7 +17,7 @@ class AuthService {
       if (userDoc.exists && userDoc.data()?['isAdmin'] == true) {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
       } else {
-        await auth.signOut();-
+        await auth.signOut();
         ArtSweetAlert.show(
           context: context,
           artDialogArgs: ArtDialogArgs(
@@ -28,15 +28,49 @@ class AuthService {
         );
       }
     } catch (e) {
-      await auth.signOut();
-      ArtSweetAlert.show(
-        context: context,
-        artDialogArgs: ArtDialogArgs(
-          type: ArtSweetAlertType.danger,
-          title: "Oops...",
-          text: e.toString(),
-        ),
-      );
+      print(e);
+      if (e is FirebaseAuthException) {
+        if (e.code == 'user-not-found') {
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+              type: ArtSweetAlertType.danger,
+              title: "Oops...",
+              text: "User Not Found",
+            ),
+          );
+        } else if (e.code == 'invalid-credential') {
+          await auth.signOut();
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+              type: ArtSweetAlertType.danger,
+              title: "Oops...",
+              text: "Invalid email or password",
+            ),
+          );
+        } else if (e.code == 'invalid-email') {
+          await auth.signOut();
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+              type: ArtSweetAlertType.danger,
+              title: "Oops...",
+              text: "Invalid email",
+            ),
+          );
+        } else {
+          await auth.signOut();
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+              type: ArtSweetAlertType.danger,
+              title: "Oops...",
+              text: "Please check your email and password",
+            ),
+          );
+        }
+      }
     }
   }
 }

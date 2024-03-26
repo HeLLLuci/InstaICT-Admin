@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class FirebaseService {
+class FirebaseServices {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   /********** Method to fetch number of total employees(Active, Inactive) ***********/
@@ -41,6 +41,22 @@ class FirebaseService {
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to update')),
+      );
+    }
+  }
+
+  static Future<void> updateAdminStatus(
+      String employeeId, bool isAdmin, BuildContext context) async {
+    try {
+      await _firestore.collection('employeeDetails').doc(employeeId).set({
+        'isAdmin': isAdmin,
+      }, SetOptions(merge: true));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Admin status updated')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update admin status: $error')),
       );
     }
   }
@@ -125,7 +141,7 @@ class FirebaseService {
                     Text("Email ID: $email"),
                     SizedBox(height: 10,),
                     ElevatedButton(onPressed: (){
-                      FirebaseService.updateEnrollment(employeeId, !isEnrolled, context);
+                      FirebaseServices.updateEnrollment(employeeId, !isEnrolled, context);
                       Navigator.of(context).pop();
                     }, child: Text("Enroll"))
                   ],

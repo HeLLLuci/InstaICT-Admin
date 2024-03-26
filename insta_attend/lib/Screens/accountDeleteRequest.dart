@@ -6,7 +6,6 @@ import 'package:insta_attend/configurations/CardTextStyle.dart';
 
 class DeleteRequest extends StatefulWidget {
   const DeleteRequest({Key? key}) : super(key: key);
-
   @override
   State<DeleteRequest> createState() => _DeleteRequestState();
 }
@@ -107,11 +106,11 @@ class _DeleteRequestState extends State<DeleteRequest> {
                                         title: "Are you sure",
                                         text: "Do you want to grant permission to delete user account ?",
                                         onConfirm: (){
-                                          FirebaseService.updateDeleteRequest(employeeId, "true", context);
+                                          FirebaseServices.updateDeleteRequest(employeeId, "true", context);
                                           Navigator.of(context).pop();
                                         },
                                       onCancel: (){
-                                        FirebaseService.updateDeleteRequest(employeeId, null, context);
+                                        FirebaseServices.updateDeleteRequest(employeeId, null, context);
                                         Navigator.of(context).pop();
                                       },
                                       showCancelBtn: true,
@@ -128,7 +127,7 @@ class _DeleteRequestState extends State<DeleteRequest> {
                                 color: Colors.green,
                               ),
                               onPressed: () =>
-                                  FirebaseService.updateDeleteRequest(employeeId, null, context)
+                                  FirebaseServices.updateDeleteRequest(employeeId, null, context)
                             ),
                           ],
                         )
